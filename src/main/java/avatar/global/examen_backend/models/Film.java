@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Films {
+public class Film {
     private String title;
     @JsonProperty("episode_id")
     private int episodeId;

@@ -1,14 +1,14 @@
 package avatar.global.examen_backend.service;
 
-import avatar.global.examen_backend.models.Films;
+import avatar.global.examen_backend.models.Film;
 import avatar.global.examen_backend.models.FilmsResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import java.util.List;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,4 +24,13 @@ public class FilmsConsumerService {
         return filmsResponseEntity.getBody();
     }
 
+    public Film getFilmById(int filmId) {
+        Optional<Film> film = getFilms().getResults().stream().filter(films -> films.getEpisodeId()==filmId).findFirst();
+        if (film.isPresent()){
+            return film.get();
+        }else{
+            System.out.println("Film not found");
+            return null;
+        }
+    }
 }

@@ -16,5 +16,5 @@ public class FilmsResponse {
     private int next;
     private int previous;
     @JsonProperty("results")
-    private List<Films> results;
+    private List<Film> results;
 }
