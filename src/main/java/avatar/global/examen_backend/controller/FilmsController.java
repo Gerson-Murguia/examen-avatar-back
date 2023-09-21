@@ -1,6 +1,7 @@
 package avatar.global.examen_backend.controller;
 
 import avatar.global.examen_backend.models.Film;
+import avatar.global.examen_backend.models.FilmCharacter;
 import avatar.global.examen_backend.service.FilmsConsumerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +20,21 @@ public class FilmsController {
 
     private final FilmsConsumerService filmsConsumerService;
 
-    @GetMapping("/films")
+    @GetMapping("/film")
     public ResponseEntity<List<Film>> films() {
         System.out.println("Peticion a films");
         return ResponseEntity.ok( filmsConsumerService.getFilms().getResults());
     }
 
-    @GetMapping("/films/{id}")
+    @GetMapping("/film/{id}")
     public ResponseEntity <Film> filmById(@PathVariable int id) {
         System.out.println("Peticion a films");
         return ResponseEntity.ok( filmsConsumerService.getFilmById(id));
+    }
+    @GetMapping("/film/{id}/characters")
+    public ResponseEntity <List<FilmCharacter>> charactersOfFilmById(@PathVariable int id) {
+        System.out.println("Peticion a film characters");
+        return ResponseEntity.ok( filmsConsumerService.getAllCharactersOfFilmById(id));
     }
 
     @GetMapping("/hello")

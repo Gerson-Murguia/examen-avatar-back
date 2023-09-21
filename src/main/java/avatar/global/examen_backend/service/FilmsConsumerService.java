@@ -1,6 +1,7 @@
 package avatar.global.examen_backend.service;
 
 import avatar.global.examen_backend.models.Film;
+import avatar.global.examen_backend.models.FilmCharacter;
 import avatar.global.examen_backend.models.FilmsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpMethod;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,5 +35,22 @@ public class FilmsConsumerService {
             System.out.println("Film not found");
             return null;
         }
+    }
+
+    public List<FilmCharacter> getAllCharactersOfFilmById(int filmId){
+        //Obtengo los personajes que pertenecen a la pelicula
+        List<String> charactersURLs = getFilmById(filmId).getCharacters();
+
+        List<FilmCharacter> filmCharactersResponse= new ArrayList<>();
+        //Peticion de datos por cada personaje
+        for (String characURL : charactersURLs){
+            FilmCharacter filmCharacter = restTemplate.exchange(characURL,
+                    HttpMethod.GET,
+                    null,
+                    FilmCharacter.class).getBody();
+            filmCharactersResponse.add(filmCharacter);
+        }
+
+        return filmCharactersResponse;
     }
 }
