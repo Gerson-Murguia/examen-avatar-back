@@ -22,24 +22,15 @@ public class FilmsController {
 
     @GetMapping("/film")
     public ResponseEntity<List<Film>> films() {
-        System.out.println("Peticion a films");
         return ResponseEntity.ok( filmsConsumerService.getFilms().getResults());
     }
 
     @GetMapping("/film/{id}")
     public ResponseEntity <Film> filmById(@PathVariable int id) {
-        System.out.println("Peticion a films");
         return ResponseEntity.ok( filmsConsumerService.getFilmById(id));
     }
     @GetMapping("/characters/{id}")
     public ResponseEntity <List<FilmCharacter>> charactersByFilmId(@PathVariable int id) {
-        System.out.println("Peticion a film characters");
         return ResponseEntity.ok( filmsConsumerService.getAllCharactersOfFilmById(id));
     }
-
-    @GetMapping("/hello")
-    public String hello(){
-        return "Hello world";
-    }
-
 }
