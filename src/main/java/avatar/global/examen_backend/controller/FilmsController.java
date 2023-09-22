@@ -31,8 +31,8 @@ public class FilmsController {
         System.out.println("Peticion a films");
         return ResponseEntity.ok( filmsConsumerService.getFilmById(id));
     }
-    @GetMapping("/film/{id}/characters")
-    public ResponseEntity <List<FilmCharacter>> charactersOfFilmById(@PathVariable int id) {
+    @GetMapping("/characters/{id}")
+    public ResponseEntity <List<FilmCharacter>> charactersByFilmId(@PathVariable int id) {
         System.out.println("Peticion a film characters");
         return ResponseEntity.ok( filmsConsumerService.getAllCharactersOfFilmById(id));
     }
